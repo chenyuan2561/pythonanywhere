@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{#  length过滤器获取movies变量长度   #}
+<p>电影数量：{{ movies|length }}</p>
+<!-- 添加电影表单 -->
+<form action="{{ url_for('add') }}" method="post">
+    <!-- required：不能为空         autocomplete='off'：提示信息不显示    -->
+    电影名称：<input type="text" name='title' required autocomplete="off">
+    上线时间：<input type="text" name='year' required autocomplete="off">
+    <input class='btn' type="submit" value="添加">
+</form> 
+<p>电影列表：</p>
+<ul class="movies-list">
+    {% for movie in movies %}
+    <li>
+        {{ movie.title }} --- {{ movie.year }}
+        <span class='float-right'>
+            <a class='xia' href="{{ url_for('delete',id=movie.id) }}">下架该电影</a>
+            <a class='baidu' href="https://baike.baidu.com/item/{{ movie.title }}/10796861">详细信息</a>
+        </span>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

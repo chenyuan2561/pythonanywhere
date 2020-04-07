@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/act.css') }}">
+    {% if user %}
+    <title>{{ user }}的电影列表</title>
+    {% else %}
+    <title>电影列表</title>
+    {% endif %}
+    {% endblock %}
+</head>
+<body>
+    <h2>
+        {% if user %}
+        <img src="{{ url_for('static',filename='img/10.png') }}" alt="头像" class='avatar'> 
+        {{ user }}
+        {% else %}
+        <a href="{{ url_for('login') }}">登录</a>
+        <a href="{{ url_for('reg') }}">注册</a>
+        {% endif %}
+    </h2>
+
+    <!-- flash提示消息 -->
+    {% for message in get_flashed_messages() %}
+        <div class='alert'>{{ message }}</div>
+    {% endfor %}
+    
+    <nav>
+        <ul>
+            <li>
+                <a href="{{ url_for('index') }}">首页</a>
+            </li>
+            <li>
+                <a href="{{ url_for('end') }}">注销</a>
+            </li>
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        &copy;<a href="www.baidu.com">百度</a>
+        <span>更多资讯请关注元子电影院</span>
+    </footer>
+
+</body>
+</html>
