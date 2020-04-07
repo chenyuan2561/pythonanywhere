@@ -15,3 +15,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(app.root_path,'dat
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = Flask
 app.config['SECRET_KEY'] = '123'
 db = SQLAlchemy(app)
+
+
+# models  数据层
+class User(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    username = db.Column(db.String(20))
+    password = db.Column(db.String(20))
